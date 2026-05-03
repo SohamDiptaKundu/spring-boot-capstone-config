@@ -3,9 +3,21 @@ spring:
     url: jdbc:mysql://localhost:3306/capstone_db_prod
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: admin
+    password: ${DB_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://integrator-1670421.okta.com/oauth2/default
+
+# Okta OAuth2 Client Configuration
+okta:
+  oauth2:
+    token-uri: https://integrator-1670421.okta.com/oauth2/default/v1/token
+    client-id: ${OKTA_CLIENT_ID}
+    client-secret: ${OKTA_CLIENT_SECRET}
